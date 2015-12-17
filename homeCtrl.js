@@ -4,27 +4,30 @@ angular.module("devMtIn").controller("homeCtrl", function($scope, profileService
 	};
 
 	$scope.sortOptions = [{
-	    display: 'Ascending'
-	  , value: false
+	    display: 'Ascending',
+	   	value: false
 	},
 	{
-	    display: 'Descending'
-	  , value: true
+	    display: 'Descending',
+	  	value: true
 	}];
 
 	$scope.editing = false;
 
 	$scope.saveProfile = function(profile) {
-		profileService.saveProfile(profile);
+		$scope.myProfile = profileService.saveProfile(profile);
 		$scope.editing = false;
 	};
 
-	$scope.myProfile = profileService.checkForProfile();
+	$scope.checkForProfile = function(){
+		$scope.myProfile = profileService.checkForProfile();
+	};
+	$scope.checkForProfile();
 
 	$scope.deleteProfile = function(profile) {
 		profileService.deleteProfile(profile);
 		$scope.myProfile = profileService.checkForProfile();
-	};	
+	};
 
 
 });
