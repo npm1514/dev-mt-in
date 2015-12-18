@@ -19,29 +19,20 @@ angular.module('devMtIn').service('profileService', function($http) {
       });
   };
 
-  $scope.checkForProfile = function() {
-    var profileId = JSON.parse(localStorage.getItem('profileId'));
-
-    if (profileId) {
-      profileService.checkForProfile(profileId.profileId)
-        .then(function(profile) {
-          $scope.myProfile = profile.data;
-        })
-        .catch(function(err) {
-          console.error(err);
-        });
-    }
+  this.checkForProfile = function(profileId) {
+    return $http({
+      method: 'GET',
+      url: baseUrl + 'api/profiles/' + profileId
+    });
   };
 
-  $scope.deleteProfile = function() {
-    profileService.deleteProfile()
-      .then(function(deletedProfile) {
-        localStorage.removeItem('profileId');
-        $scope.myProfile = {};
-      })
-      .catch(function(err) {
-        console.error(err);
-      });
+  this.deleteProfile = function() {
+    var profileId = JSON.parse(localStorage.getItem('profileId')).profileId;
+
+    return $http({
+      method: 'DELETE',
+      url: baseUrl + 'api/profiles/' + profileId
+    });
   };
 
 });

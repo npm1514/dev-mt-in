@@ -5,7 +5,7 @@
   <link href='https://fonts.googleapis.com/css?family=Raleway:400,500,700,600' rel='stylesheet' type='text/css'>
   <link rel="stylesheet" href="css/styles3.css">
 	<meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1"> 
+  <meta name="viewport" content="width=device-width, initial-scale=1">
 	<title>DevMtin</title>
 </head>
 
@@ -13,14 +13,14 @@
 	<div class="l-header">
 		<h1>{{myProfile.name || "Your Name"}}</h1>
 	</div>
-  
-  <div class="wrapper">  
+
+  <div class="wrapper">
     <div>
       <h2>Profile</h2>
       <button class="l-btn l-btn-main" ng-click="editing = !editing">Editing :</button>
     </div>
 
-    <div>      
+    <div>
 
       <input id="name" ng-model="myProfile.name" type="text" placeholder="Your Name" ng-disabled="editing">
       <br />
@@ -38,11 +38,11 @@
   <div class="l-container">
     <h2>Friends</h2>
 
-    <button class="l-btn l-btn-main" ng-click="myProfile">Go</button>
+    <button class="l-btn l-btn-main" ng-click="findFriend(findFriend.name)">Go</button>
     <input type="text" placeholder="Find Friends" ng-model="findFriend.name">
     <select ng-model="sortReverse" ng-options="option.value as option.display for option in sortOptions"></select>
     <div class="friendList" ng-repeat="friend in myProfile.friends | filter : findFriend.name | orderBy : 'name' : sortReverse">
-      <span class="closeBtn"></span>
+      <span ng-click="removeFriend(friend._id)" class="closeBtn"></span>
         {{friend.name}}
       <br />
       <div class="secondConnection friendList">
@@ -50,7 +50,7 @@
       </div>
     </div>
   </div>
-  
+
 	<div id="myModalMask">
 		<div id="myModal">
 			<div>
@@ -60,12 +60,12 @@
 				</div>
 					<br />
 				<div class="friendList">
-					<span class="friend"></span> Potential Friends
+					<span class="friend"  ng-repeat="friend in potentialFriends"><button ng-click="addFriend(friend._id)" name="button"></button>{{friend}}</span> Potential Friends
 				</div>
 			</div>
 		</div>
 	</div>
-  
+
 
   <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.4.8/angular.min.js"></script>
   <script src="app.js"></script>
