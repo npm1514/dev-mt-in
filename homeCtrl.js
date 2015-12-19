@@ -26,6 +26,7 @@ angular.module("devMtIn").controller("homeCtrl", function($scope, profileService
 	    profileService.checkForProfile(profileId.profileId)
 	    .then(function(profile) {
 	      $scope.myProfile = profile.data;
+	      friendService.findFriendsFriends(profile.data); // Finding second level friends.
 	    })
 	    .catch(function(err) {
 	      console.error(err);
